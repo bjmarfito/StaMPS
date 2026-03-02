@@ -1114,7 +1114,7 @@ switch(group_type)
         uw=load(phuwname);
         scn=load(scnname);
         scla=load(sclaname);
-        ph_all=uw.ph_uw - scn.ph_scn_slave - repmat(scla.C_ps_uw,1,size(uw.ph_uw,2)) - scla.ph_scla;
+        ph_all=uw.ph_uw - scn.ph_ramp - repmat(scla.C_ps_uw,1,size(uw.ph_uw,2)) - scla.ph_scla;
         clear uw scn scla
         % subtract of oscilator drift in case of envisat
         ph_all = ph_all-ph_unw_eni_osci;
