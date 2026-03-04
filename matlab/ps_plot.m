@@ -1999,7 +1999,8 @@ if plot_flag==-1
     lims=[];
     ifg_data_RMSE=[];
     h_axes_all=[];
-    savename=['ps_plot_',value_type]
+    savename=['ps_plot_',value_type];
+    fprintf(['Filename: ' ,savename,'\n'])
     try
        stamps_save(savename,ph_disp,ifg_list)
     catch
@@ -2122,6 +2123,10 @@ else
        ext_data = []; 
     end
     ps_plot_ifg(ph_disp(:,i_im),plot_flag,lims,lon_rg,lat_rg,ext_data);
+
+
+
+
     %plot_phase(ph_tc(:,i)*conj(ph_tc(ref_ix,i)));
     box on
     if n_ifg_plot>1
@@ -2243,7 +2248,3 @@ if ts_flag == 1
 %  ts_plot   % select a point then plot, for the first time.
 end
 
-
-
-
-    
