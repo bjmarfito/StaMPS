@@ -317,6 +317,7 @@ sclasbname=['./scla_sb',num2str(psver)];
 sclasmoothname=['./scla_smooth',num2str(psver)];
 sclasbsmoothname=['./scla_smooth_sb',num2str(psver)];
 meanvname=['./mv',num2str(psver)];
+scnkrigingflag = getparm('scn_kriging_flag');
 
 
 ps=load(psname);
@@ -1114,7 +1115,11 @@ switch(group_type)
         uw=load(phuwname);
         scn=load(scnname);
         scla=load(sclaname);
-        ph_all=uw.ph_uw - scn.ph_ramp - repmat(scla.C_ps_uw,1,size(uw.ph_uw,2)) - scla.ph_scla;
+        if scnkrigingflag == 'y'
+            ph_all=uw.ph_uw - scn.ph_ramp - repmat(scla.C_ps_uw,1,size(uw.ph_uw,2)) - scla.ph_scla;
+        else
+            ph_all=uw.ph_uw - scn.ph_scn_slave - repmat(scla.C_ps_uw,1,size(uw.ph_uw,2)) - scla.ph_scla;
+        end
         clear uw scn scla
         % subtract of oscilator drift in case of envisat
         ph_all = ph_all-ph_unw_eni_osci;
@@ -1122,7 +1127,7 @@ switch(group_type)
         [ph_all] = ps_deramp(ps,ph_all);
         ph_all(:,ps.master_ix)=0;
         ref_ps=ps_setref;
-        fig_name = 'u-dms';
+        fig_name = 'u-dmos';
     case {'u-a'}
         uw=load(phuwname);
         aps=load(apsname);
