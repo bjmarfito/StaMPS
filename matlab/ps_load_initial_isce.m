@@ -108,7 +108,7 @@ n_ps=size(ij,1);
 if ~exist(calname,'file')
     calname= ['../',calname];
 end
-%Modified based from solution made by S-Nari
+% Modified based from solution made by S-Nari
 if exist(calname,'file')
     [calfile,calconst]=textread(calname,'%s%f');
     caldate=zeros(length(calfile),1);
@@ -256,6 +256,8 @@ if exist('data_inc','var')
     inc=data_inc(IND);
     inc = inc*pi./180;
     stamps_save(incsavename,inc)
+    la = inc;
+    stamps_save(lasavename,la)
 else
     % trying look angle instead 
      if ~exist(laname,'file')
